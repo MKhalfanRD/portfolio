@@ -1,59 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<div class="counter-container">
-  <h3>👀 Total Kunjungan</h3>
-  <p class="count-number" id="visitor-count">0</p>
-</div>
-
 <style>
-  .counter-container {
-    text-align: center;
-    padding: 20px;
-    margin: 20px auto;
-    background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
-    border-radius: 16px;
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
-    max-width: 300px;
-    color: #333;
-  }
+    .counter-container {
+      text-align: center;
+      padding: 20px;
+      margin: 40px auto;
+      background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+      border-radius: 16px;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+      max-width: 300px;
+      color: #333;
+      font-family: Arial, sans-serif;
+    }
 
-  .counter-container h3 {
-    font-size: 20px;
-    margin-bottom: 10px;
-  }
+    .counter-container h3 {
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
 
-  .count-number {
-    font-size: 48px;
-    font-weight: bold;
-    color: #fff;
-    margin: 0;
-  }
-</style>
+    .count-number {
+      font-size: 52px;
+      font-weight: bold;
+      color: #fff;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
 
-<script>
-  fetch('https://api.counterapi.dev/hit/portofolioku/visitorcount')
-    .then(res => res.json())
-    .then(data => {
-      animateCounter("visitor-count", data.value);
-    });
+  <div class="counter-container">
+    <h3>👀 Total Kunjungan</h3>
+    <p class="count-number" id="visitor-count">0</p>
+  </div>
 
-  function animateCounter(id, endValue) {
-    const element = document.getElementById(id);
-    let startValue = 0;
-    const duration = 800; // total animasi (ms)
-    const increment = Math.ceil(endValue / (duration / 20)); // 20ms per increment
+  <script>
+    const webAppURL = 'https://script.google.com/macros/s/AKfycbwzm_pjsztHIp1Z8A42hNMKoTReSa3ycM0u-pAoiE3Jdg-6EW66ttQX3bBrNLI7F82N/exec';
 
-    const counter = setInterval(() => {
-      startValue += increment;
-      if (startValue >= endValue) {
-        startValue = endValue;
-        clearInterval(counter);
+    async function updateCounter() {
+      try {
+        const res = await fetch(webAppURL + '?action=hit');
+        const data = await res.json();
+        document.getElementById('visitor-count').innerText = data.count;
+      } catch (err) {
+        console.error('Error update counter:', err);
       }
-      element.textContent = startValue;
-    }, 20);
-  }
-</script>
+    }
+
+    updateCounter();
+  </script>
 
   
 <head>
