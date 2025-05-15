@@ -30,26 +30,25 @@
 <body>
 
   <div class="counter-container">
-    <h3>👀 Total Kunjungan</h3>
-    <p class="count-number" id="visitor-count">0</p>
-  </div>
+  <h3>👀 Total Kunjungan</h3>
+  <p class="count-number" id="visitor-count">0</p>
+</div>
 
-  <script>
-    const webAppURL = 'https://script.google.com/macros/s/AKfycbwGaaWAEACXbAMpjlMdK4CnXJUdxopEbIRbqhqXFDQ-_KQKdTEVx2iRBZ4qCShLg0V4/exec';
+<script>
+  const webAppURL = 'https://script.google.com/macros/s/AKfycbymdjRhK7l1ompZ-0BBLoc3U7Hj4K3nYpVKMTxAKOUi5h-jNjCyfCiiVz75i_9CEjIi/exec';
 
-    async function updateCounter() {
-      try {
-        const res = await fetch(webAppURL + '?action=hit');
-        const data = await res.json();
-        document.getElementById('visitor-count').innerText = data.count;
-      } catch (err) {
-        console.error('Error update counter:', err);
-      }
+  async function updateCounter() {
+    try {
+      const res = await fetch(webAppURL + '?action=hit');
+      const data = await res.json();
+      document.getElementById('visitor-count').innerText = data.count;
+    } catch (err) {
+      console.error('Error update counter:', err);
     }
+  }
 
-    updateCounter();
-  </script>
-
+  updateCounter();
+</script>
   
 <head>
   <meta charset="utf-8">
